@@ -20,6 +20,7 @@ html{
 }
 
 .chart{
+  display:grid;
   background-color: white;
   padding: 30px 220px 30px 220px;
 }

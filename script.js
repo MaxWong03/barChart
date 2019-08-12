@@ -18,12 +18,16 @@ $(function(){
     for (let i = 0; i < barNum; i++){
       $(domObject.chart).append(`<div class=bar${i+1}></div>`);
     } 
+    return barNum+1; //num of column 
   }
   
-  
+  const makeChartCol = (charColNum) => {
+    $(domObject.chart).css('grid-template-columns', `repeat(${charColNum}, 1fr)`);
+  }
   
   const drawBartChart = (data, option, element) => {
-    addBarTag(data);
+    const charColNum = addBarTag(data);
+    makeChartCol(charColNum);
   }
   
   drawBartChart([1,2,3,4,5]);
