@@ -34,15 +34,23 @@ $(function(){
     $(domObject.chart).css('grid-template-columns', `repeat(${charColNum}, 1fr)`);
   }
   
+  //addLabel add labels for each bar
+  const addLabel = (data) => {
+    const barNum = getBarNum(data);
+    for (let i = 0; i < barNum; i++){
+      $(domObject.chart).append(`<div class=label${i+1}></div?>`);
+    }
+  }
 
 
   const drawBartChart = (data, option, element) => {
     const charColNum = addBarTag(data);
     makeChartCol(charColNum);
     alignBar(charColNum);
+    addLabel(data);
   }
   
-  drawBartChart([1,2,3]);
+  drawBartChart([1,2,3,5,6,7,8,9,10]);
 
 
 });
