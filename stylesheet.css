@@ -1,3 +1,5 @@
+
+
 html{
   scroll-behavior: smooth;
   background-color: #333;
@@ -6,6 +8,7 @@ html{
 #barChart{
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 
@@ -14,15 +17,20 @@ html{
   background-color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 30px 220px 30px 220px;
+  height: 10vh;
+  width: 80vw;
   margin-top: 20px;
 
 }
 
 .chart{
   display:grid;
+  grid-template-rows: repeat(101, 1fr);
   background-color: white;
-  padding: 30px 220px 30px 220px;
+  height: 60vh;
+  width: 80vw;
+  grid-column-gap: 5px;
+
 }
 
 
@@ -30,7 +38,8 @@ html{
   background-color: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding: 30px 220px 30px 220px;
+  height: 30vh;
+  width: 80vw;
   margin-bottom: 20px;
 }
 
@@ -38,3 +47,9 @@ html{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
+
+[class*=bar]{
+  grid-row: 1/101;
+  background-color: #ff4136;
+}
+
