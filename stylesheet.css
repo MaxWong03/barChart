@@ -6,35 +6,34 @@ html{
 #barChart{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 
 
 #titleText{
   background-color: white;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   padding: 30px 220px 30px 220px;
   margin-top: 20px;
-  margin-bottom: 20px;
-  
 
 }
 
 .chart{
   background-color: white;
-  border-radius: 10px;
   padding: 30px 220px 30px 220px;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 
 .option{
   background-color: white;
-  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   padding: 30px 220px 30px 220px;
-  margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.optionBar{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
