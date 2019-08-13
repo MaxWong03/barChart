@@ -37,16 +37,54 @@ html{
 
 
 .yAxis{
-  border-right: 5px solid grey;
+  border-right: 5px solid rgba(128, 128, 128, 0.781);;
   grid-row: 1/101;
   margin-right: 10px;
 }
 
-.xAxis{
+[class*="Percent"]{
+  grid-column: 1/2;
+}
+
+[class*="Percent"]::after{
+  display: inline-block;
+  content: "  __  ";
+}
+
+.hunPercent{
+  grid-row: 0;
+}
+
+.ninetyPercent{
+  grid-row: 10;
+}
+
+.eightyPercent{
+  grid-row: 20;
+}
+.seventyPercent{
+  grid-row: 30;
+}
+.sixtyPercent{
+  grid-row: 40;
+}
+.fiftyPercent{
+  grid-row: 50;
+}
+.fourtyPercent{
+  grid-row: 60;
+}
+.thirtyPercent{
+  grid-row: 70;
+}
+.twentyPercent{
+  grid-row: 80;
+}
+.tenPercent{
+  grid-row: 90;
+}
+.zeroPercent{
   grid-row: 100;
-  border-top: 5px solid grey; 
-  grid-column: 2/10;
-  margin-top: 10px;
 }
 
 .option{
