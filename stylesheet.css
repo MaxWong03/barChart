@@ -24,6 +24,7 @@ html{
   padding-top:25px;
   text-align: center;
   font-size: 2em;
+
 }
 
 
@@ -105,7 +106,7 @@ html{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ff4136;
+  background-color: #f3655e;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   
