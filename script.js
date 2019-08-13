@@ -1,5 +1,6 @@
 const domObject = {
   chart: '.chart',
+  allBars: '[class*=bar]'
 }
 
 
@@ -70,6 +71,23 @@ $(function () {
 
     }
   } 
+
+  //changeValuePlacement changes the placement of bar's value
+  const changeValuePlacement = (placement) => {
+    switch (placement){
+      case 'top':
+        $(domObject.allBars).css('align-items', 'flex-start');
+        break;
+      case 'bottom':
+        $(domObject.allBars).css('align-items', 'flex-end'); 
+        break; 
+      default:
+        return 0;  //default is center
+    }
+    
+    }
+    
+  
 
   const drawBarChart = (data, option, element) => {
     const charColNum = addBarTag(data);
