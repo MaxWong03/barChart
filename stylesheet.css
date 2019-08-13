@@ -21,7 +21,9 @@ html{
   height: 10vh;
   width: 80vw;
   margin-top: 20px;
-
+  padding-top:25px;
+  text-align: center;
+  font-size: 2em;
 }
 
 
@@ -93,6 +95,8 @@ html{
 }
 
 .optionBar{
+  margin-top: 50px;
+  justify-items: center;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
@@ -107,9 +111,8 @@ html{
   
 }
 
-
-
 [class*=label]{
   justify-self: center;
   margin-top: 10px;
 }
+
