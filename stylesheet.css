@@ -36,11 +36,7 @@ html{
 }
 
 
-.yAxis{
-  border-right: 5px solid rgba(128, 128, 128, 0.781);;
-  grid-row: 1/101;
-  margin-right: 10px;
-}
+
 
 [class*="Percent"]{
   grid-column: 1/2;
@@ -102,7 +98,6 @@ html{
 }
 
 [class*=bar]{
-  grid-row: 1/100;
   background-color: #ff4136;
 }
 

@@ -53,15 +53,26 @@ $(function () {
     }
   }
 
-  const drawBartChart = (data, option, element) => {
+  //fillBar fill out the Bars accoording to the input values
+  const fillBar = (data) => {
+    for (let i = 0; i < data.length; i++){
+      let fill = 100 - data[i];
+      let currentBar = `.bar${i+1}`;
+      $(currentBar).css('grid-row', `${fill}/100`);
+    }
+  }
+
+
+  const drawBarChart = (data, option, element) => {
     const charColNum = addBarTag(data);
     makeChartCol(charColNum);
     alignBar(charColNum);
     addLabel(data);
     alignLabel(charColNum);
+    fillBar(data);
   }
 
-  drawBartChart([1, 2, 3, 4,5,6,7,8]);
+  drawBarChart([30,50,40,10,70]);
 
 
     });
