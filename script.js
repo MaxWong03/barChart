@@ -1,10 +1,20 @@
 const domObject = {
   chart: '.chart',
-  allBars: '[class*=bar]'
+  allBars: '[class*=bar]',
+  title: '#titleText'
 }
 
 
-
+const colorsCode = {
+  red: '#c38d9e',
+  blue:  '#85adcb',
+  orange: '#e27d60',
+  yellow: '#e8a87c',
+  green: '#41b3a3',
+  grey: '#bab2b5',
+  lightGrey: '#eae7dc',
+  lightNavy: '#a80de6'
+}
 
 
 $(function () {
@@ -19,7 +29,6 @@ $(function () {
 
   const calPercent = (value, data) => {
     let percent = ((value / findMax(data)).toFixed(2)) * 100;
-    console.log(percent);
     percent === 100 ? percent = 2 : percent = 100 - percent;
     return percent;
   }
@@ -83,16 +92,22 @@ $(function () {
     }
   }
 
-  //barColorOdd changes the color of bars
+  //barColorOdd changes the color of bars along with the labels
   const changeBarColor = (data, color, option) => {
     let optionValue;
     option === 'even' ? optionValue = 2 : optionValue = 1;
-    for (let i = optionValue; i < data.length; i += 2) {
+    for (let i = optionValue; i <= data.length; i += 2) {
       let currentBar = document.querySelector(`.bar${i}`);
-      $(currentBar).css('background-color', color);
+      let currentLabel = document.querySelector(`.label${i}`);
+      $(currentBar).css('background-color', colorsCode[color]);
+      $(currentLabel).css('background-color', colorsCode[color]);
     }
 
   }
+
+  const changeLabelColor = (data, color, option) => {
+
+  } 
 
 
   //changeValuePlacement changes the placement of bar's value
@@ -110,6 +125,11 @@ $(function () {
 
   }
 
+  const changeTitleColor = (color) => {
+    $(domObject.title).css('background-color', colorsCode[color]);
+  }
+
+
 
 
   const drawBarChart = (data, option, element) => {
@@ -120,7 +140,9 @@ $(function () {
     alignLabel(charColNum);
     fillBar(data);
     displayBarValue(data);
+    changeBarColor(data, 'red', 'odd');
     changeBarColor(data, 'blue', 'even');
+    changeTitleColor('lightGrey');
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 20]);
