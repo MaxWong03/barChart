@@ -1,5 +1,6 @@
 
 
+
 html{
   scroll-behavior: smooth;
   background-color: #333;
@@ -14,7 +15,7 @@ html{
 
 
 #titleText{
-  background-color: white;
+  background-color: #eee;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   height: 10vh;
@@ -23,24 +24,39 @@ html{
 
 }
 
+
+
 .chart{
-  display:grid;
+  display: grid;
   grid-template-rows: repeat(101, 1fr);
-  background-color: white;
+  background-color: #eee;
   height: 60vh;
   width: 80vw;
   grid-column-gap: 5px;
-
 }
 
 
+.yAxis{
+  border-right: 5px solid grey;
+  grid-row: 1/101;
+  margin-right: 10px;
+}
+
+.xAxis{
+  grid-row: 100;
+  border-top: 5px solid grey; 
+  grid-column: 2/10;
+  margin-top: 10px;
+}
+
 .option{
-  background-color: white;
+  background-color: #eee;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   height: 30vh;
   width: 80vw;
   margin-bottom: 20px;
+  
 }
 
 .optionBar{
@@ -49,7 +65,7 @@ html{
 }
 
 [class*=bar]{
-  grid-row: 1/101;
+  grid-row: 1/100;
   background-color: #ff4136;
 }
 
