@@ -44,11 +44,12 @@ html{
 
 [class*="Percent"]{
   grid-column: 1/2;
+  justify-self: end;
 }
 
 [class*="Percent"]::after{
   display: inline-block;
-  content: "  __  ";
+  content: "\2000\2000\2014";
 }
 
 .hunPercent{
@@ -83,9 +84,7 @@ html{
 .tenPercent{
   grid-row: 90;
 }
-.zeroPercent{
-  grid-row: 100;
-}
+
 
 .option{
   background-color: #eee;
@@ -107,3 +106,6 @@ html{
   background-color: #ff4136;
 }
 
+[class*=label]{
+  justify-self: center;
+}
