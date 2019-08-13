@@ -129,7 +129,14 @@ $(function () {
     $(domObject.title).css('background-color', colorsCode[color]);
   }
 
-
+  //option controller
+  const optionController = () => {
+    return{
+      changeBarSpace: function (space){
+        $(domObject.chart).css('grid-column-gap', space);
+      }
+    }
+  }
 
 
   const drawBarChart = (data, option, element) => {
@@ -143,6 +150,8 @@ $(function () {
     changeBarColor(data, 'red', 'odd');
     changeBarColor(data, 'blue', 'even');
     changeTitleColor('lightGrey');
+    const optionControl = optionController();
+    optionControl.changeBarSpace('10px');
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 20]);
