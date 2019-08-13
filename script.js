@@ -53,15 +53,23 @@ $(function () {
     }
   }
 
-  //fillBar fill out the Bars accoording to the input values
+  //fillBar fill out the Bars accoording to the input values 
   const fillBar = (data) => {
     for (let i = 0; i < data.length; i++){
       let fill = 100 - data[i];
       let currentBar = `.bar${i+1}`;
-      $(currentBar).css('grid-row', `${fill}/100`);
+      $(currentBar).css('grid-row', `${fill}/100`); 
     }
   }
 
+  //displayBarValue display the data value for the corresponding bar
+  const displayBarValue = (data) =>{
+    for (let i = 0; i < data.length; i++){
+      let currentBar = document.querySelector(`.bar${i+1}`);
+      currentBar.innerHTML = `<p>${data[i]}</p>`;
+
+    }
+  } 
 
   const drawBarChart = (data, option, element) => {
     const charColNum = addBarTag(data);
@@ -70,6 +78,7 @@ $(function () {
     addLabel(data);
     alignLabel(charColNum);
     fillBar(data);
+    displayBarValue(data);
   }
 
   drawBarChart([30,50,40,10,70]);

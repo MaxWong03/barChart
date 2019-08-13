@@ -98,6 +98,9 @@ html{
 }
 
 [class*=bar]{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #ff4136;
 }
 
