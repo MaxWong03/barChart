@@ -53,32 +53,32 @@ html{
 }
 
 .ninetyPercent{
-  grid-row: 10;
+  grid-row: 9;
 }
 
 .eightyPercent{
-  grid-row: 20;
+  grid-row: 19;
 }
 .seventyPercent{
-  grid-row: 30;
+  grid-row: 29;
 }
 .sixtyPercent{
-  grid-row: 40;
+  grid-row: 39;
 }
 .fiftyPercent{
-  grid-row: 50;
+  grid-row: 49;
 }
 .fourtyPercent{
-  grid-row: 60;
+  grid-row: 59;
 }
 .thirtyPercent{
-  grid-row: 70;
+  grid-row: 69;
 }
 .twentyPercent{
-  grid-row: 80;
+  grid-row: 79;
 }
 .tenPercent{
-  grid-row: 90;
+  grid-row: 89;
 }
 
 
@@ -102,8 +102,14 @@ html{
   align-items: center;
   justify-content: center;
   background-color: #ff4136;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  
 }
+
+
 
 [class*=label]{
   justify-self: center;
+  margin-top: 10px;
 }

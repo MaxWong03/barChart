@@ -13,6 +13,17 @@ $(function () {
     return data.length;
   }
 
+  const findMax = (data) => {
+    return (Math.max(...data));
+  }
+
+  const calPercent = (value,data) => {
+    let percent = (( value/findMax(data) ).toFixed(2))*100;
+    console.log(percent);
+    percent === 100 ? percent = 2 : percent = 100 - percent;
+    return percent;
+  }
+
   //addBarTag add html tag for the bars 
   const addBarTag = (data) => {
     const barNum = getBarNum(data);
@@ -57,7 +68,7 @@ $(function () {
   //fillBar fill out the Bars accoording to the input values 
   const fillBar = (data) => {
     for (let i = 0; i < data.length; i++){
-      let fill = 100 - data[i];
+      let fill = calPercent(data[i],data);
       let currentBar = `.bar${i+1}`;
       $(currentBar).css('grid-row', `${fill}/100`); 
     }
@@ -99,7 +110,7 @@ $(function () {
     displayBarValue(data);
   }
 
-  drawBarChart([30,50,40,10,70]);
+  drawBarChart([300,150,40,10,70,50,200,80,300,20]);
 
 
     });
