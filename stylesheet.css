@@ -5,7 +5,7 @@
 
 html{
   scroll-behavior: smooth;
-  background-color: rgb(224, 200, 184);
+  background-color: rgba(229, 198, 157, 0.904);
 }
 
 #barChart{
@@ -17,30 +17,33 @@ html{
 
 
 #titleText{
-  background-color: #e3dce7;
+  background-color: #ffe0da91;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   height: 5vh;
   width: 80vw;
-  margin-top: 20px;
-  padding-top:25px;
+  margin-top: 5px;
+  padding-top:15px;
   text-align: center;
-  font-size: 2em;
+  font-size: 2.5em;
   font-weight: bolder;
-  color: rgb(58, 52, 52);
+  color: rgba(58, 52, 52, 0.664);
   display:none;
-
-
+  padding-bottom: 15px;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.377);
+  overflow: scroll;
 }
 
 
 .chart{
   display: grid;
   grid-template-rows: repeat(101, 1fr);
-  background-color: #ebe2de;
+  background-color: #ebeade7a;
   height: 65vh;
   width: 80vw;
   grid-column-gap: 5px;
+  overflow: scroll;
+  padding-top:20px;
 }
 
 
@@ -52,12 +55,21 @@ html{
   font-weight: 900;
   color: rgb(83, 76, 76);
   opacity: 0;
+  text-shadow: 1.2px 1.2px rgba(0, 0, 0, 0.288);
+  font-size: 1.3em;
 }
 
 
 [class*="Percent"]::after{
-  display: inline-block;
+  display: inline-flex;
   content: "\2000\2000\2014";
+  align-content: flex-start;
+}
+
+@media (max-width: 1399px){
+  [class*="Percent"]::after{
+    display:none;
+  }
 }
 
 .hunPercent{
@@ -95,30 +107,34 @@ html{
 
 
 .option{
-  background-color: #e9dad7;
+  background-color: #f3e9df;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  height: 15vh;
+  height: 20vh;
   width: 80vw;
   display:none;
-
+  overflow: scroll;
 }
 
 .optionBar{
-  margin-top: 50px;
-  justify-items: center;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 [class*=bar]{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f3655e;
+  background-color: #ebe2de;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   font-weight: light;
+  box-shadow: 2.5px 1.5px 7px 5px rgba(0, 0, 0, 0.075)
+}
+
+[class*=bar]:hover{
+  transform: translateY(-0.85em);
 }
 
 [class*=label]{
@@ -127,13 +143,41 @@ html{
   padding: 12px;
   border-radius: 20px;
   margin-bottom: 15px;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 0.8em;
+  font-weight: 900;
   color: rgb(63, 58, 58);
+  opacity: 0.8;
+  text-shadow: 0.5px 0.5px  rgba(41, 40, 40, 0.432);
+
 }
+
+
 
 [id*=barValue] {
-  color: rgb(99, 96, 96);
-  font-size: 25px;
+  color: rgb(102, 98, 98);
+  font-size: 2em;
+  font-weight: 600;
+  opacity: 0.8;
+  text-shadow: 1px 1px  rgba(41, 40, 40, 0.322);
+
 }
 
+.button{
+  background: rgba(197, 144, 137, 0.692);
+  border-radius: 10px;
+  padding: 10px;
+  color:rgb(255, 246, 246);
+  text-shadow: 3px 3px 10px rgba(41, 40, 40, 0.63);
+  box-shadow: 3px 3px rgba(150, 74, 74, 0.349);
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#labelColor, #chartAxes{
+  margin-top: 20px;
+}
+
+.button:hover, [class*=label]:hover{
+  transform: translateY(-0.50em);
+}

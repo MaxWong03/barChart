@@ -6,7 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>barChart</title>
-  <link rel="stylesheet" href="stylesheet.css">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>
@@ -15,29 +18,29 @@
       <div id="titleText">
       </div>
     </div>
-    <div class="barChart">
+    <div class="chartGrid">
       <div class="chart">
-          <div class="hunPercent">100%</div>
-          <div class="ninetyPercent">90%</div>
-          <div class="eightyPercent">80%</div>
-          <div class="seventyPercent">70%</div>
-          <div class="sixtyPercent">60%</div>
-          <div class="fiftyPercent">50%</div>
-          <div class="fourtyPercent">40%</div>
-          <div class="thirtyPercent">30%</div>
-          <div class="twentyPercent">20%</div>
-          <div class="tenPercent">10%</div>
+        <div class="hunPercent">100%</div>
+        <div class="ninetyPercent">90%</div>
+        <div class="eightyPercent">80%</div>
+        <div class="seventyPercent">70%</div>
+        <div class="sixtyPercent">60%</div>
+        <div class="fiftyPercent">50%</div>
+        <div class="fourtyPercent">40%</div>
+        <div class="thirtyPercent">30%</div>
+        <div class="twentyPercent">20%</div>
+        <div class="tenPercent">10%</div>
       </div>
     </div>
     <div class="option">
       <div class="optionBar">
-        <div class = "button" id="barColor">barColor</div>
-        <div class = "button" id="labelColor">labelColor</div>
-        <div class = "button" id="barSpace">barSpace</div>
-        <div class = "button" id="chartAxes">chartAxes</div>
-        <div class = "button" id="title">title</div>
-        <div class = "button" id="tFontSize">titleFontSize</div>
-        <div class = "button" id="tFontColor">titleFontColor</div>
+        <div class="button" id="title"><i class="fas fa-edit"></i> Title</div>
+        <div class="button" id="tFontSize"><i class="fas fa-text-height"></i> Title Font Size</div>
+        <div class="button" id="tFontColor"><i class="fas fa-palette"></i> Title Font Color</div>
+        <div class="button" id="barColor"><i class="fas fa-palette"></i> Bar Color </div>
+        <div class="button" id="barSpace"><i class="fas fa-signal"></i> Bar Space</div>
+        <div class="button" id="labelColor"><i class="fas fa-palette"></i> Label Color</div>
+        <div class="button" id="chartAxes"><i class="fas fa-chart-line"></i> Chart Axes</div>
       </div>
     </div>
   </div>

@@ -87,7 +87,7 @@ $(function () {
     for (let i = 0; i < data.length; i++) {
       let fill = calPercent(data[i], data);
       let currentBar = `.bar${i + 1}`;
-      $(currentBar).css('grid-row', `${fill}/100`);
+      $(currentBar).css('grid-row', `${fill-1}/100`);
       $(currentBar).show('toggle','linear',3000);
     }
   }
@@ -211,11 +211,9 @@ $(function () {
     optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor('yellow');
     optionControl.changeTitleText('Untitled Bar Chart');
-    optionControl.changeTitleSize('xx-large');
-
   }
 
-  drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 20]);
+  drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 120]);
 
 
 });
