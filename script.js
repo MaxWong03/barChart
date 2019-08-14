@@ -13,7 +13,8 @@ const colorsCode = {
   green: '#41b3a3',
   grey: '#bab2b5',
   lightGrey: '#eae7dc',
-  lightNavy: '#a80de6'
+  lightNavy: '#a80de6',
+  lightPurple: '#d5cfda'
 }
 
 
@@ -84,7 +85,7 @@ $(function () {
   }
 
   //displayBarValue display the data value for the corresponding bar
-  const displayBarValue = (data) => {
+  const displayBarValue = (data) => { 
     for (let i = 0; i < data.length; i++) {
       let currentBar = document.querySelector(`.bar${i + 1}`);
       currentBar.innerHTML = `<p>${data[i]}</p>`;
@@ -143,7 +144,7 @@ $(function () {
     }
   }
 
-
+  //main function that draws the chart
   const drawBarChart = (data, option, element) => {
     const charColNum = addBarTag(data);
     makeChartCol(charColNum);
@@ -154,7 +155,7 @@ $(function () {
     displayBarValue(data);
     changeBarColor(data, 'red', 'odd');
     changeBarColor(data, 'blue', 'even');
-    changeTitleColor('lightGrey');
+    changeTitleColor('lightPurple');
     const optionControl = optionController(data);
     optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor('yellow');
