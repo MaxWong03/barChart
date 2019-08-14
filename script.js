@@ -30,9 +30,9 @@ const colorsCode = {
 $(function () {
 
   const loopOption = (optionArr, current) => {
-    if (current != optionArr[optionArr.length-1]){
+    if (current != optionArr[optionArr.length - 1]) {
       return optionArr[optionArr.indexOf(current) + 1];
-    }else{
+    } else {
       return optionArr[0];
     }
   }
@@ -152,7 +152,7 @@ $(function () {
   const optionController = (data) => {
     const saveData = data;
     const changeYAxisFormat = (format) => {
-      let [newYAxis, newValue] = [[],100];
+      let [newYAxis, newValue] = [[], 100];
       if (format === 'percent') {
         for (let i = 0; i < 10; i++) {
           newYAxis.push(`${newValue}%`);
@@ -167,7 +167,7 @@ $(function () {
         }
       }
 
-      return newYAxis.sort((a,b) => {return b-a});
+      return newYAxis.sort((a, b) => { return b - a });
     }
 
     return {
@@ -206,13 +206,13 @@ $(function () {
         let yAxis = document.querySelectorAll(domObject.allPercent);
         let newYAxis = changeYAxisFormat(format);
         $(domObject.allPercent).hide('slide', 800);
-        setTimeout(()=>{
+        setTimeout(() => {
           for (let i = 0; i < 10; i++) {
             yAxis[i].innerHTML = newYAxis[i];
           }
           $(domObject.allPercent).show('slide', 800)
         }, 1100)
-  
+
       },
 
     }
@@ -231,31 +231,56 @@ $(function () {
   }
 
   const eventListener = (optionController) => {
-    $(domObject.titleButton).click(function(){ //changing title text
-      let oldTitleText = $(domObject.title).html();
+    $(domObject.titleButton).click(function () { //changing title text
+      function setEndOfContenteditable(contentEditableElement) {
+        var range, selection;
+        if (document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+        {
+          range = document.createRange();//Create a range (a range is a like the selection but invisible)
+          range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
+          range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+          selection = window.getSelection();//get the selection object (allows you to change selection)
+          selection.removeAllRanges();//remove any selections already made
+          selection.addRange(range);//make the range you have just created the visible selection
+        }
+        else if (document.selection)//IE 8 and lower
+        {
+          range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
+          range.moveToElementText(contentEditableElement);//Select the entire contents of the element with the range
+          range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+          range.select();//Select the range (make it the visible selection
+        }
+      }
       $(domObject.title).attr('contenteditable', 'true');
+      $(domObject.title).focus();
+      setEndOfContenteditable(document.querySelector(domObject.title));
+      document.addEventListener('keypress', (event) => {
+        if (event.keyCode === 13) {
+          $(domObject.title).attr('contenteditable', 'false');
+        }
+      });
     });
 
-    $(domObject.tFontSize).click(function(){ //changing title font
+    $(domObject.tFontSize).click(function () { //changing title font
 
-      const fontSize = ['16px','24px','32px','40px','48px'];
+      const fontSize = ['16px', '24px', '32px', '40px', '48px'];
       const currentFontSize = ($(domObject.title).css('font-size'));
       $(domObject.title).css('font-size', loopOption(fontSize, currentFontSize));
     });
 
-    $(domObject.chartAxes).click(function(){ //changing chart axes
-      const getFormat = () =>{
-        if ($('.tenPercent').html() === '10%'){
+    $(domObject.chartAxes).click(function () { //changing chart axes
+      const getFormat = () => {
+        if ($('.tenPercent').html() === '10%') {
           return 'percent';
-        }else{
+        } else {
           return 'value';
         }
       }
-      getFormat() === 'percent' ? optionController.changeYAxis('value'): optionController.changeYAxis('percent');
+      getFormat() === 'percent' ? optionController.changeYAxis('value') : optionController.changeYAxis('percent');
     });
 
-    $(domObject.barSpace).click(function(){
-      const barSpace = ['10px', '20px', '30px', '40px', '50px','60px', '70px'];
+    $(domObject.barSpace).click(function () { //changing barSpace
+      const barSpace = ['10px', '20px', '30px', '40px', '50px', '60px', '70px'];
       const currentBarSize = ($(domObject.chart).css('column-gap'));
       $(domObject.chart).css('column-gap', loopOption(barSpace, currentBarSize));
     });
