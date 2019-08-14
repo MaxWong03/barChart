@@ -307,6 +307,11 @@ $(function () {
     optionControl.changeOddBarColor('yellow');
     optionControl.changeTitleText('Untitled Bar Chart');
     eventListener(optionControl);
+    $(`#tFontColorSelector`).spectrum({
+      color: 'red',
+      showAlpha: true
+
+    })
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 120]);
