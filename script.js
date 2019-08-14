@@ -196,9 +196,14 @@ $(function () {
       }, changeYAxis: function (format) {
         let yAxis = document.querySelectorAll(domObject.allPercent);
         let newYAxis = changeYAxisFormat(format);
-        for (let i = 0; i < 10; i++) {
-          yAxis[i].innerHTML = newYAxis[i];
-        }
+        $(domObject.allPercent).hide('slide', 800);
+        setTimeout(()=>{
+          for (let i = 0; i < 10; i++) {
+            yAxis[i].innerHTML = newYAxis[i];
+          }
+          $(domObject.allPercent).show('slide', 800)
+        }, 1100)
+  
       },
 
     }
@@ -269,8 +274,6 @@ $(function () {
     optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor('yellow');
     optionControl.changeTitleText('Untitled Bar Chart');
-    optionControl.changeYAxis('percent');
-    optionControl.changeYAxis('value');
     eventListener(optionControl);
   }
 
