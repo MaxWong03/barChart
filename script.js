@@ -78,7 +78,7 @@ $(function () {
         'grid-row': '101/102'
       })
       $(currentLabel).hide();
-      $(currentLabel).show('toggle','linear',3000);
+      $(currentLabel).show('toggle', 'linear', 3000);
     }
   }
 
@@ -88,7 +88,7 @@ $(function () {
       let fill = calPercent(data[i], data);
       let currentBar = `.bar${i + 1}`;
       $(currentBar).css('grid-row', `${fill}/100`);
-      $(currentBar).show('toggle','linear',3000);
+      $(currentBar).show('toggle', 'linear', 3000);
     }
   }
 
@@ -115,8 +115,6 @@ $(function () {
 
   }
 
-
-
   //changeValuePlacement changes the placement of bar's value
   const changeValuePlacement = (placement) => {
     switch (placement) {
@@ -139,6 +137,25 @@ $(function () {
   //option controller have access to all custom functions that are included in options
   const optionController = (data) => {
     const saveData = data;
+    const changeYAxisFormat = (format) => {
+      let [newYAxis, newValue] = [[],100];
+      if (format === 'percent') {
+        for (let i = 0; i < 10; i++) {
+          newYAxis.push(`${newValue}%`);
+          newValue -= 10;
+        }
+      } else {
+        let [max, percent] = [findMax(saveData), 0.1];
+        for (let i = 0; i < 10; i++) {
+          let newValue = Math.round(max * percent);
+          newYAxis.push(newValue);
+          percent += 0.1;
+        }
+      }
+
+      return newYAxis.sort((a,b) => {return b-a});
+    }
+
     return {
       //changeBarSpace changes space between bars
       changeBarSpace: function (space) {
@@ -167,28 +184,31 @@ $(function () {
           default:
             [optionValue, increments] = [0, 1];
         }
-        console.log(optionValue, increments);
         for (let i = optionValue; i <= saveData.length; i += increments) {
           let currentLabel = document.querySelector(`.label${i}`);
           $(currentLabel).css('background-color', colorsCode[color]);
         }
-      }, changeChartAxes: function (format) {
-
-      }
+      }, changeYAxis: function (format) {
+        let yAxis = document.querySelectorAll(domObject.allPercent);
+        let newYAxis = changeYAxisFormat(format);
+        for (let i = 0; i < 10; i++) {
+          yAxis[i].innerHTML = newYAxis[i];
+        }
+      },
 
     }
   }
 
-  const showTicks = () =>{
-    $(domObject.allPercent).animate({opacity: 1},2000);
+  const showTicks = () => {
+    $(domObject.allPercent).animate({ opacity: 1 }, 2000);
   }
 
-  const showTitle = () =>{
+  const showTitle = () => {
     $(domObject.title).toggle('slide', 1400);
   }
-  
-  const showOption =() =>{
-    $(domObject.option).toggle('slide',{direction: 'right'},1400);
+
+  const showOption = () => {
+    $(domObject.option).toggle('slide', { direction: 'right' }, 1400);
   }
 
   //main function that draws the chart
@@ -201,9 +221,9 @@ $(function () {
     addLabel(data);
     alignLabel(charColNum);
     showTicks();
-    setTimeout(()=>{
+    setTimeout(() => {
       fillBar(data);
-    },1000);
+    }, 1000);
     changeBarColor(data, 'red', 'odd');
     changeBarColor(data, 'blue', 'even');
     displayBarValue(data);
@@ -211,6 +231,8 @@ $(function () {
     optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor('yellow');
     optionControl.changeTitleText('Untitled Bar Chart');
+    optionControl.changeYAxis('percent');
+    optionControl.changeYAxis('value');
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 120]);
