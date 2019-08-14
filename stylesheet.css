@@ -5,7 +5,7 @@
 
 html{
   scroll-behavior: smooth;
-  background-color: #333;
+  background-color: rgb(224, 200, 184);
 }
 
 #barChart{
@@ -28,6 +28,7 @@ html{
   font-size: 2em;
   font-weight: bolder;
   color: rgb(58, 52, 52);
+  display:none;
 
 
 }
@@ -99,6 +100,7 @@ html{
   border-bottom-right-radius: 10px;
   height: 15vh;
   width: 80vw;
+  display:none;
 
 }
 

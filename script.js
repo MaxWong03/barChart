@@ -22,6 +22,7 @@ const colorsCode = {
 
 
 $(function () {
+
   //getBarNum returns the number of bar the chart should render 
   const getBarNum = (data) => {
     return data.length;
@@ -183,12 +184,10 @@ $(function () {
   }
 
   const showTitle = () =>{
-    $(domObject.title).hide();
     $(domObject.title).toggle('slide', 1400);
   }
   
   const showOption =() =>{
-    $(domObject.option).hide();
     $(domObject.option).toggle('slide',{direction: 'right'},1400);
   }
 
