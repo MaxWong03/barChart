@@ -4,7 +4,11 @@ const domObject = {
   title: '#titleText',
   allPercent: '[class*=Percent]',
   allLabel: '[class*=label]',
-  option: '.option'
+  option: '.option',
+  titleButton: '#title',
+  optionBar: '.optionBar',
+  allButtons: '[class*=button]',
+  tFontSize: '#tFontSize'
 }
 
 
@@ -211,6 +215,28 @@ $(function () {
     $(domObject.option).toggle('slide', { direction: 'right' }, 1400);
   }
 
+  const eventListener = (optionController) => {
+    $(domObject.titleButton).click(function(){
+      let oldTitleText = $(domObject.title).html();
+      $(domObject.title).html(`<input type="text" placeholder=${oldTitleText} id="titleInput">`); 
+    });
+
+    $(domObject.tFontSize).click(function(){
+      const loopFont = (size, currentSize) =>{
+        console.log(currentSize);
+        console.log(size[4]);
+        if (currentSize !== size[4]){
+          return size[size.indexOf(currentSize) + 1];
+        }else{
+          return size[0];
+        }
+      }
+      const fontSize = ['16px','24px','32px','40px','48px'];
+      const currentFontSize = ($(domObject.title).css('font-size'));
+      $(domObject.title).css('font-size', loopFont(fontSize, currentFontSize));
+    })
+  }
+
   //main function that draws the chart
   const drawBarChart = (data, option, element) => {
     const charColNum = addBarTag(data);
@@ -233,6 +259,7 @@ $(function () {
     optionControl.changeTitleText('Untitled Bar Chart');
     optionControl.changeYAxis('percent');
     optionControl.changeYAxis('value');
+    eventListener(optionControl);
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 120]);

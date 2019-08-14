@@ -17,6 +17,8 @@ html{
 
 
 #titleText{
+  display:grid;
+  place-items: center;
   background-color: #ffe0da91;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -24,11 +26,10 @@ html{
   width: 80vw;
   margin-top: 5px;
   padding-top:15px;
-  text-align: center;
   font-size: 2.5em;
   font-weight: bolder;
+  text-align: center;
   color: rgba(58, 52, 52, 0.664);
-  display:none;
   padding-bottom: 15px;
   text-shadow: 1px 1px rgba(0, 0, 0, 0.377);
   overflow: scroll;
@@ -177,4 +178,8 @@ html{
 
 .button:hover, [class*=label]:hover{
   transform: translateY(-0.50em);
+}
+
+#titleInput{
+  size: 100;
 }
