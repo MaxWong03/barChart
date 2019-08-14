@@ -8,7 +8,8 @@ const domObject = {
   titleButton: '#title',
   optionBar: '.optionBar',
   allButtons: '[class*=button]',
-  tFontSize: '#tFontSize'
+  tFontSize: '#tFontSize',
+  chartAxes: '#chartAxes'
 }
 
 
@@ -216,12 +217,12 @@ $(function () {
   }
 
   const eventListener = (optionController) => {
-    $(domObject.titleButton).click(function(){
+    $(domObject.titleButton).click(function(){ //changing title text
       let oldTitleText = $(domObject.title).html();
       $(domObject.title).html(`<input type="text" placeholder=${oldTitleText} id="titleInput">`); 
     });
 
-    $(domObject.tFontSize).click(function(){
+    $(domObject.tFontSize).click(function(){ //changing title font
       const loopFont = (size, currentSize) =>{
         console.log(currentSize);
         console.log(size[4]);
@@ -234,7 +235,18 @@ $(function () {
       const fontSize = ['16px','24px','32px','40px','48px'];
       const currentFontSize = ($(domObject.title).css('font-size'));
       $(domObject.title).css('font-size', loopFont(fontSize, currentFontSize));
-    })
+    });
+
+    $(domObject.chartAxes).click(function(){ //changing chart axes
+      const getFormat = () =>{
+        if ($('.tenPercent').html() === '10%'){
+          return 'percent';
+        }else{
+          return 'value';
+        }
+      }
+      getFormat() === 'percent' ? optionController.changeYAxis('value'): optionController.changeYAxis('percent');
+    });
   }
 
   //main function that draws the chart
