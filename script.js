@@ -1,7 +1,7 @@
 const domObject = {
   chart: '.chart',
   allBars: '[class*=bar]',
-  title: '#titleText'
+  title: '#titleText',
 }
 
 
@@ -88,9 +88,10 @@ $(function () {
   const displayBarValue = (data) => { 
     for (let i = 0; i < data.length; i++) {
       let currentBar = document.querySelector(`.bar${i + 1}`);
-      currentBar.innerHTML = `<p>${data[i]}</p>`;
-
+      currentBar.innerHTML = `<p id=barValue${i+1}>${data[i]}</p>`;
     }
+
+   
   }
 
   //barColorOdd changes the color of bars along with the labels
@@ -140,7 +141,33 @@ $(function () {
       },
       changeOddBarColor: function(color){
         changeBarColor(saveData,color,'odd');
+      }, changeTitleText: function(newTitle){
+        $(domObject.title).html(newTitle);
+      },  changeTitleColor: function(color){
+        $(domObject.title).css('color', colorsCode[color]);
+      },  changeTitleSize: function(size){
+        $(domObject.title).css('font-size', size);
+      },  changeLabelColor: function(color,option){
+        let optionValue, increments;
+        switch (option){
+          case 'odd':
+            [optionValue, increments] = [1, 2];
+            break;
+          case 'even':
+            [optionValue, increments] = [2, 2];
+            break;
+          default:
+            [optionValue, increments] = [0, 1];
+        }
+        console.log(optionValue, increments);
+        for (let i = optionValue; i <= saveData.length; i+= increments){
+          let currentLabel = document.querySelector(`.label${i}`);
+          $(currentLabel).css('background-color', colorsCode[color]);
+        }
+      }, changeChartAxes: function(format){
+        
       }
+      
     }
   }
 
@@ -155,10 +182,12 @@ $(function () {
     displayBarValue(data);
     changeBarColor(data, 'red', 'odd');
     changeBarColor(data, 'blue', 'even');
-    changeTitleColor('lightPurple');
     const optionControl = optionController(data);
     optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor('yellow');
+    optionControl.changeTitleText('Untitled Bar Chart');
+    optionControl.changeTitleSize('xx-large');
+
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 20]);
