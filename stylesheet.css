@@ -195,12 +195,10 @@ html{
 
 .sp-container{
   border-radius: 7px;
-  border: none;
   font: normal 12px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;;
 }
 
 .sp-preview{
-  border: none;
   border-radius: 20px;
 }
 
@@ -210,4 +208,25 @@ html{
 
 .sp-palette-button-container, .sp-button-container{
   display: none;
+}
+
+
+
+.sp-container, .sp-preview, .sp-color, .sp-hue, .sp-alpha-inner{
+  border:none;
+}
+
+.sp-alpha-handle{
+  border-radius: 10px;
+  border: 2px solid rgb(209, 207, 207)
+}
+
+.sp-slider{
+  border-radius: 10px;
+  border: 2px solid rgb(209, 207, 207)
+}
+
+.sp-dagger{
+  border-radius: 10px;
+  border: 2px solid rgb(209, 207, 207)
 }
