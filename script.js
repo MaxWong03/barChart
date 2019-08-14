@@ -2,12 +2,15 @@ const domObject = {
   chart: '.chart',
   allBars: '[class*=bar]',
   title: '#titleText',
+  allPercent: '[class*=Percent]',
+  allLabel: '[class*=label]',
+  option: '.option'
 }
 
 
 const colorsCode = {
   red: '#c38d9e',
-  blue:  '#85adcb',
+  blue: '#85adcb',
   orange: '#e27d60',
   yellow: '#e8a87c',
   green: '#41b3a3',
@@ -48,6 +51,7 @@ $(function () {
     for (let i = 0; i < charColNum - 2; i++) {
       let currentBar = `.bar${i + 1}`;
       $(currentBar).css('grid-column', `${i + 2}/${i + 3}`);
+      $(currentBar).hide()
     }
 
   }
@@ -72,6 +76,8 @@ $(function () {
         'grid-column': `${i + 2}/${i + 3}`,
         'grid-row': '101/102'
       })
+      $(currentLabel).hide();
+      $(currentLabel).show('toggle','linear',3000);
     }
   }
 
@@ -81,17 +87,18 @@ $(function () {
       let fill = calPercent(data[i], data);
       let currentBar = `.bar${i + 1}`;
       $(currentBar).css('grid-row', `${fill}/100`);
+      $(currentBar).show('toggle','linear',3000);
     }
   }
 
   //displayBarValue display the data value for the corresponding bar
-  const displayBarValue = (data) => { 
+  const displayBarValue = (data) => {
     for (let i = 0; i < data.length; i++) {
       let currentBar = document.querySelector(`.bar${i + 1}`);
-      currentBar.innerHTML = `<p id=barValue${i+1}>${data[i]}</p>`;
+      currentBar.innerHTML = `<p id=barValue${i + 1}>${data[i]}</p>`;
     }
 
-   
+
   }
 
   //barColorOdd changes the color of bars along with the labels
@@ -131,25 +138,25 @@ $(function () {
   //option controller have access to all custom functions that are included in options
   const optionController = (data) => {
     const saveData = data;
-    return{
+    return {
       //changeBarSpace changes space between bars
-      changeBarSpace: function (space){
+      changeBarSpace: function (space) {
         $(domObject.chart).css('grid-column-gap', space);
       },
       changeEvenBarColor: function (color) {
         changeBarColor(saveData, color, 'even');
       },
-      changeOddBarColor: function(color){
-        changeBarColor(saveData,color,'odd');
-      }, changeTitleText: function(newTitle){
+      changeOddBarColor: function (color) {
+        changeBarColor(saveData, color, 'odd');
+      }, changeTitleText: function (newTitle) {
         $(domObject.title).html(newTitle);
-      },  changeTitleColor: function(color){
+      }, changeTitleColor: function (color) {
         $(domObject.title).css('color', colorsCode[color]);
-      },  changeTitleSize: function(size){
+      }, changeTitleSize: function (size) {
         $(domObject.title).css('font-size', size);
-      },  changeLabelColor: function(color,option){
+      }, changeLabelColor: function (color, option) {
         let optionValue, increments;
-        switch (option){
+        switch (option) {
           case 'odd':
             [optionValue, increments] = [1, 2];
             break;
@@ -160,28 +167,47 @@ $(function () {
             [optionValue, increments] = [0, 1];
         }
         console.log(optionValue, increments);
-        for (let i = optionValue; i <= saveData.length; i+= increments){
+        for (let i = optionValue; i <= saveData.length; i += increments) {
           let currentLabel = document.querySelector(`.label${i}`);
           $(currentLabel).css('background-color', colorsCode[color]);
         }
-      }, changeChartAxes: function(format){
-        
+      }, changeChartAxes: function (format) {
+
       }
-      
+
     }
+  }
+
+  const showTicks = () =>{
+    $(domObject.allPercent).animate({opacity: 1},2000);
+  }
+
+  const showTitle = () =>{
+    $(domObject.title).hide();
+    $(domObject.title).toggle('slide', 1400);
+  }
+  
+  const showOption =() =>{
+    $(domObject.option).hide();
+    $(domObject.option).toggle('slide',{direction: 'right'},1400);
   }
 
   //main function that draws the chart
   const drawBarChart = (data, option, element) => {
     const charColNum = addBarTag(data);
+    showTitle();
+    showOption();
     makeChartCol(charColNum);
     alignBar(charColNum);
     addLabel(data);
     alignLabel(charColNum);
-    fillBar(data);
-    displayBarValue(data);
+    showTicks();
+    setTimeout(()=>{
+      fillBar(data);
+    },1000);
     changeBarColor(data, 'red', 'odd');
     changeBarColor(data, 'blue', 'even');
+    displayBarValue(data);
     const optionControl = optionController(data);
     optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor('yellow');

@@ -50,7 +50,9 @@ html{
   justify-self: end;
   font-weight: 900;
   color: rgb(83, 76, 76);
+  opacity: 0;
 }
+
 
 [class*="Percent"]::after{
   display: inline-block;
