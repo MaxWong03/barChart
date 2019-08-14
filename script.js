@@ -44,14 +44,14 @@ $(function () {
     for (let i = 0; i < barNum; i++) {
       $(domObject.chart).append(`<div class=bar${i + 1}></div>`);
     }
-    return barNum + 2; //num of column, + 1 for ticks, + 1 for extra white space
+    return barNum + 1; //num of column,  + 1 for extra white space
   }
 
   //alignBar puts the bars between ticks and last white space column
   const alignBar = (charColNum) => {
-    for (let i = 0; i < charColNum - 2; i++) {
+    for (let i = 0; i < charColNum - 1; i++) {
       let currentBar = `.bar${i + 1}`;
-      $(currentBar).css('grid-column', `${i + 2}/${i + 3}`);
+      $(currentBar).css('grid-column', `${i + 1}/${i + 2}`);
       $(currentBar).hide()
     }
 
@@ -71,10 +71,10 @@ $(function () {
 
   //alignLabel align label to each bar 
   const alignLabel = (charColNum) => {
-    for (let i = 0; i < charColNum - 2; i++) {
+    for (let i = 0; i < charColNum - 1; i++) {
       let currentLabel = `.label${i + 1}`;
       $(currentLabel).css({
-        'grid-column': `${i + 2}/${i + 3}`,
+        'grid-column': `${i + 1}/${i + 2}`,
         'grid-row': '101/102'
       })
       $(currentLabel).hide();
@@ -87,7 +87,7 @@ $(function () {
     for (let i = 0; i < data.length; i++) {
       let fill = calPercent(data[i], data);
       let currentBar = `.bar${i + 1}`;
-      $(currentBar).css('grid-row', `${fill-1}/100`);
+      $(currentBar).css('grid-row', `${fill}/100`);
       $(currentBar).show('toggle','linear',3000);
     }
   }

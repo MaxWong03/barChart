@@ -35,13 +35,26 @@ html{
   scroll-behavior: smooth;
 }
 
+.chartComponent{
+  display: flex;
+}
+
+.yAxis{
+  display:grid;
+  grid-template-rows: repeat(101, 1fr);
+  height: 65vh;
+  width: 5vw;
+  background-color: #ebeade7a;
+  padding-top: 20px;
+  grid-column-gap: 5px;
+}
 
 .chart{
   display: grid;
   grid-template-rows: repeat(101, 1fr);
   background-color: #ebeade7a;
   height: 65vh;
-  width: 80vw;
+  width: 75vw;
   grid-column-gap: 5px;
   padding-top:20px;
   overflow: scroll;
@@ -50,10 +63,10 @@ html{
 
 
 
-
 [class*="Percent"]{
   grid-column: 1/2;
-  justify-self: end;
+  grid-row: 50/50;
+  justify-self: center;
   font-weight: 900;
   color: rgb(83, 76, 76);
   opacity: 0;
@@ -61,53 +74,31 @@ html{
   font-size: 1.3em;
 }
 
-
-[class*="Percent"]::after{
-  display: inline-flex;
-  content: "\2000\2000\2014";
-  align-content: flex-start;
-}
-
-@media (max-width: 1399px){
-  [class*="Percent"]{
-
-  }
-  [class*="Percent"]::after{
-    display:none;
-  }
-}
-
 .hunPercent{
-  grid-row: 0;
+  grid-row: 1;
 }
-
 .ninetyPercent{
-  grid-row: 9;
+  grid-row: 8;
 }
-
 .eightyPercent{
-  grid-row: 19;
+  grid-row: 16;
 }
 .seventyPercent{
-  grid-row: 29;
+  grid-row: 24;
 }
 .sixtyPercent{
-  grid-row: 39;
+  grid-row: 32;
 }
 .fiftyPercent{
-  grid-row: 49;
-}
-.fourtyPercent{
-  grid-row: 59;
-}
-.thirtyPercent{
-  grid-row: 69;
-}
-.twentyPercent{
-  grid-row: 79;
-}
-.tenPercent{
-  grid-row: 89;
+  grid-row: 40;
+}.fourtyPercent{
+  grid-row: 48;
+}.thirtyPercent{
+  grid-row: 56;
+}.twentyPercent{
+  grid-row: 64;
+}.tenPercent{
+  grid-row: 72;
 }
 
 
