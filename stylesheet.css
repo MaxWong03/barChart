@@ -179,3 +179,35 @@ html{
 .button:hover, [class*=label]:hover{
   transform: translateY(-0.50em);
 }
+
+.sp-replacer{
+  background-color: rgba(197, 144, 137, 0.692);
+  border: 5px solid rgb(255, 246, 246);
+  color:  rgb(255, 246, 246);
+  box-shadow: none;
+  text-shadow: none;
+
+}
+
+.sp-replacer:hover{
+  background-color: rgba(139, 197, 137, 0.692);
+}
+
+.sp-container{
+  border-radius: 7px;
+  border: none;
+  font: normal 12px "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;;
+}
+
+.sp-preview{
+  border: none;
+  border-radius: 20px;
+}
+
+.sp-dd{
+  font-size: 13px;
+}
+
+.sp-palette-button-container, .sp-button-container{
+  display: none;
+}

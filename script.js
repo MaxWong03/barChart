@@ -10,7 +10,8 @@ const domObject = {
   allButtons: '[class*=button]',
   tFontSize: '#tFontSize',
   chartAxes: '#chartAxes',
-  barSpace: '#barSpace'
+  barSpace: '#barSpace',
+  tFontColor: '#tFontColor'
 }
 
 
@@ -284,7 +285,24 @@ $(function () {
       const currentBarSize = ($(domObject.chart).css('column-gap'));
       $(domObject.chart).css('column-gap', loopOption(barSpace, currentBarSize));
     });
+
+    $(domObject.tFontColor).click(function(){//changing title font color
+      if(document.querySelector(domObject.tFontColor).firstChild.id !== 'tFontColorSelector'){
+        $('#tFontColorButton').remove();
+        $(domObject.tFontColor).prepend('<input type="text" id="tFontColorSelector">');
+        $(`#tFontColorSelector`).spectrum({
+          color: 'red',
+          showAlpha: true
+    
+        })
+      }else{
+        //prevent adding more than 1 color selection box
+      }
+
+    });
   }
+
+
 
   //main function that draws the chart
   const drawBarChart = (data, option, element) => {
@@ -307,11 +325,7 @@ $(function () {
     optionControl.changeOddBarColor('yellow');
     optionControl.changeTitleText('Untitled Bar Chart');
     eventListener(optionControl);
-    $(`#tFontColorSelector`).spectrum({
-      color: 'red',
-      showAlpha: true
-
-    })
+    
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 120]);
