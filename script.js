@@ -9,7 +9,8 @@ const domObject = {
   optionBar: '.optionBar',
   allButtons: '[class*=button]',
   tFontSize: '#tFontSize',
-  chartAxes: '#chartAxes'
+  chartAxes: '#chartAxes',
+  barSpace: '#barSpace'
 }
 
 
@@ -27,6 +28,14 @@ const colorsCode = {
 
 
 $(function () {
+
+  const loopOption = (optionArr, current) => {
+    if (current != optionArr[optionArr.length-1]){
+      return optionArr[optionArr.indexOf(current) + 1];
+    }else{
+      return optionArr[0];
+    }
+  }
 
   //getBarNum returns the number of bar the chart should render 
   const getBarNum = (data) => {
@@ -228,18 +237,10 @@ $(function () {
     });
 
     $(domObject.tFontSize).click(function(){ //changing title font
-      const loopFont = (size, currentSize) =>{
-        console.log(currentSize);
-        console.log(size[4]);
-        if (currentSize !== size[4]){
-          return size[size.indexOf(currentSize) + 1];
-        }else{
-          return size[0];
-        }
-      }
+
       const fontSize = ['16px','24px','32px','40px','48px'];
       const currentFontSize = ($(domObject.title).css('font-size'));
-      $(domObject.title).css('font-size', loopFont(fontSize, currentFontSize));
+      $(domObject.title).css('font-size', loopOption(fontSize, currentFontSize));
     });
 
     $(domObject.chartAxes).click(function(){ //changing chart axes
@@ -251,6 +252,12 @@ $(function () {
         }
       }
       getFormat() === 'percent' ? optionController.changeYAxis('value'): optionController.changeYAxis('percent');
+    });
+
+    $(domObject.barSpace).click(function(){
+      const barSpace = ['10px', '20px', '30px', '40px', '50px','60px', '70px'];
+      const currentBarSize = ($(domObject.chart).css('column-gap'));
+      $(domObject.chart).css('column-gap', loopOption(barSpace, currentBarSize));
     });
   }
 

@@ -47,7 +47,6 @@ html{
   width: 5vw;
   background-color: #ebeade7a;
   padding-top: 20px;
-  grid-column-gap: 5px;
 }
 
 .chart{
@@ -56,7 +55,6 @@ html{
   background-color: #ebeade7a;
   height: 65vh;
   width: 75vw;
-  grid-column-gap: 5px;
   padding-top:20px;
   overflow: scroll;
   scroll-behavior: smooth;
