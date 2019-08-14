@@ -105,9 +105,6 @@ $(function () {
 
   }
 
-  const changeLabelColor = (data, color, option) => {
-
-  } 
 
 
   //changeValuePlacement changes the placement of bar's value
@@ -129,11 +126,19 @@ $(function () {
     $(domObject.title).css('background-color', colorsCode[color]);
   }
 
-  //option controller
-  const optionController = () => {
+  //option controller have access to all custom functions that are included in options
+  const optionController = (data) => {
+    const saveData = data;
     return{
+      //changeBarSpace changes space between bars
       changeBarSpace: function (space){
         $(domObject.chart).css('grid-column-gap', space);
+      },
+      changeEvenBarColor: function (color) {
+        changeBarColor(saveData, color, 'even');
+      },
+      changeOddBarColor: function(color){
+        changeBarColor(saveData,color,'odd');
       }
     }
   }
@@ -150,8 +155,9 @@ $(function () {
     changeBarColor(data, 'red', 'odd');
     changeBarColor(data, 'blue', 'even');
     changeTitleColor('lightGrey');
-    const optionControl = optionController();
+    const optionControl = optionController(data);
     optionControl.changeBarSpace('10px');
+    optionControl.changeOddBarColor('yellow');
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 20]);
