@@ -233,7 +233,7 @@ $(function () {
   const eventListener = (optionController) => {
     $(domObject.titleButton).click(function(){ //changing title text
       let oldTitleText = $(domObject.title).html();
-      $(domObject.title).html(`<input type="text" placeholder=${oldTitleText} id="titleInput">`); 
+      $(domObject.title).attr('contenteditable', 'true');
     });
 
     $(domObject.tFontSize).click(function(){ //changing title font

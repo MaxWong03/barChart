@@ -126,7 +126,8 @@ html{
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   font-weight: light;
-  box-shadow: 2.5px 1.5px 7px 5px rgba(0, 0, 0, 0.075)
+  box-shadow: 2.5px 1.5px 7px 5px rgba(0, 0, 0, 0.075);
+  opacity: 0.8;
 }
 
 [class*=bar]:hover{
@@ -176,8 +177,4 @@ html{
 
 .button:hover, [class*=label]:hover{
   transform: translateY(-0.50em);
-}
-
-#titleInput{
-  size: 100;
 }
