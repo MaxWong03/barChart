@@ -245,7 +245,7 @@ $(function () {
   }
 
   const showTicks = () => {
-    $(domObject.allPercent).animate({ opacity: 1 }, 2000);
+    $(domObject.allPercent).animate({ opacity: 1}, 2000);
   }
 
   const showTitle = () => {
