@@ -151,6 +151,11 @@ $(function () {
 
   //option controller have access to all custom functions that are included in options
   const optionController = (data) => {
+    const previewColor ={
+      update:() =>{
+        return $(`.sp-preview-inner`).css('background-color');
+      }
+    }
     const saveData = data;
     const changeYAxisFormat = (format) => {
       let [newYAxis, newValue] = [[], 100];
@@ -214,7 +219,25 @@ $(function () {
           $(domObject.allPercent).show('slide', 800)
         }, 1100)
 
-      },
+      }, colorSelect: function(domObj,target, button){
+        if(document.querySelector(domObj).firstChild.id!=='tFontColorSelector'){
+          $(domObj).prepend('<input type="text" class="colorSelector">');
+          $(`.colorSelector`).spectrum({
+            color: 'red',
+            showAlpha: true
+      
+          })
+        }else{
+          //prevent adding more than 1 color selection box
+        }
+        $('.sp-val').mouseout(function(){
+          $(button).css('color', previewColor.update());
+          $(`.colorSelector`).css('color', previewColor.update());
+          $('.sp-replacer').css('color', previewColor.update());
+          $(target).css('color', previewColor.update());
+  
+        });
+      }
 
     }
   }
@@ -286,29 +309,10 @@ $(function () {
       $(domObject.chart).css('column-gap', loopOption(barSpace, currentBarSize));
     });
 
-    $(domObject.tFontColor).click(function(){//changing title font color
-      if(document.querySelector(domObject.tFontColor).firstChild.id !== 'tFontColorSelector'){
-        // $('#tFontColorButton').remove();
-        $(domObject.tFontColor).prepend('<input type="text" id="tFontColorSelector">');
-        $(`#tFontColorSelector`).spectrum({
-          color: 'red',
-          showAlpha: true
     
-        })
-      }else{
-        //prevent adding more than 1 color selection box
-      }
-      const previewColor = { 
-        update: () =>{
-          return $(`.sp-preview-inner`).css('background-color');
-        }
-      }
-      $('.sp-val').mouseout(function(){
-        $('#tFontColor').css('color', previewColor.update());
-        $(`#tFontColorButton`).css('color', previewColor.update());
-        $('.sp-replacer').css('color', previewColor.update());
 
-      });
+    $(domObject.tFontColor).click(function(){//changing title font color
+      optionController.colorSelect(domObject.tFontColor,domObject.title, domObject.tFontColor);
       
     });
   }
