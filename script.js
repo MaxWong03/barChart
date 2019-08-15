@@ -146,18 +146,39 @@ $(function () {
     }
 
   }
-  
+
   //addColorSelecton initiaize the color selection for certain buttons 
-  const addColorSelection = () =>{
+  const addColorSelection = () => {
     $(domObject.barColor).prepend('<input type="text" class="barColorSelector">');
     $(domObject.labelColor).prepend('<input type="text" class="labelColorSelector">');
     $(domObject.tFontColor).prepend('<input type="text" class="tFontColorSelector">');
 
-    $(domObject.allColorSelector).spectrum({
+    $('.tFontColorSelector').spectrum({
       color: 'red',
-      showAlpha: true
-
+      showAlpha: true,
+      move: function(tinycolor){
+        $(domObject.title).css('color', tinycolor.toHexString());
+        $(domObject.tFontColor).css('color', tinycolor.toHexString());
+      }
     })
+    $('.labelColorSelector').spectrum({
+      color: 'red',
+      showAlpha: true,
+      move: function(tinycolor){
+        $(domObject.allLabel).css('background-color',tinycolor.toHexString());
+        $(domObject.labelColor).css('color', tinycolor.toHexString());
+      }
+    })
+    $('.barColorSelector').spectrum({
+      color: 'red',
+      showAlpha: true,
+      move: function(tinyColor){
+        $(domObject.allBars).css('background-color',
+        tinyColor.toHexString());
+        $(domObject.barColor).css('color', tinyColor.toHexString());
+      }
+    })
+
   }
 
   const changeTitleColor = (color) => {
@@ -166,41 +187,6 @@ $(function () {
 
   //option controller have access to all custom functions that are included in options
   const optionController = (data) => {
-    const previewColor ={
-      update:(updateTarget) =>{
-        if(updateTarget === 'tFont'){
-          return $(`.sp-preview-inner`).css('background-color');
-        }else if (updateTarget === 'label'){
-          return $('.labelColorSelector .sp-preview-inner').css('background-color');
-        }else{
-          return $('.barColorSelector .sp-preview-inner').css('background-color');
-        }
-      }
-    }
-    const parseColorTarget =(target) => {
-      if (target === 'title'){
-        return {
-          button: domObject.tFontColor,
-          colorTarget: domObject.title,
-          changeColor: 'color',
-          preview: 'tFont'
-      }
-      }else if (target === 'bar'){
-        return {
-          button: domObject.barColor,
-          colorTarget: domObject.allBars,
-          changeColor: 'background-color',
-          preview: 'bar'
-        }
-      }else{
-        return {
-          button: domObject.labelColor,
-          colorTarget: domObject.allLabel,
-          changeColor: 'background-color'
-        }
-      }
-    }
-
     const saveData = data;
     const changeYAxisFormat = (format) => {
       let [newYAxis, newValue] = [[], 100];
@@ -264,22 +250,13 @@ $(function () {
           $(domObject.allPercent).show('slide', 800)
         }, 1100)
 
-      }, colorSelect: function(target){
-        const targetObj = parseColorTarget(target);
-        $('.sp-val').mouseout(function(){
-          $(targetObj.button).css('color', previewColor.update(targetObj.preview));
-          $(`.colorSelector`).css('color', previewColor.update(targetObj.preview));
-          $('.sp-replacer').css('color', previewColor.update(targetObj.preview));
-          $(targetObj.colorTarget).css(targetObj.changeColor, previewColor.update(targetObj.preview));
-  
-        });
       }
 
     }
   }
 
   const showTicks = () => {
-    $(domObject.allPercent).animate({ opacity: 1}, 2000);
+    $(domObject.allPercent).animate({ opacity: 1 }, 2000);
   }
 
   const showTitle = () => {
@@ -345,11 +322,8 @@ $(function () {
       $(domObject.chart).css('column-gap', loopOption(barSpace, currentBarSize));
     });
 
-    
-    //Event listener for color Selection 
-    optionController.colorSelect('title');
-    optionController.colorSelect('label');
-    optionController.colorSelect('bar');
+
+
 
 
   }
@@ -378,7 +352,7 @@ $(function () {
     optionControl.changeOddBarColor('yellow');
     optionControl.changeTitleText('Untitled Bar Chart');
     eventListener(optionControl);
-    
+
   }
 
   drawBarChart([300, 150, 40, 10, 70, 50, 200, 80, 300, 120]);
