@@ -11,7 +11,9 @@ const domObject = {
   tFontSize: '#tFontSize',
   chartAxes: '#chartAxes',
   barSpace: '#barSpace',
-  tFontColor: '#tFontColor'
+  tFontColor: '#tFontColor',
+  barColor: '#barColor',
+  labelColor: '#labelColor'
 }
 
 
@@ -219,7 +221,7 @@ $(function () {
           $(domObject.allPercent).show('slide', 800)
         }, 1100)
 
-      }, colorSelect: function(domObj,target, button){
+      }, colorSelect: function(domObj,target){
         if(document.querySelector(domObj).firstChild.id!=='tFontColorSelector'){
           $(domObj).prepend('<input type="text" class="colorSelector">');
           $(`.colorSelector`).spectrum({
@@ -231,7 +233,7 @@ $(function () {
           //prevent adding more than 1 color selection box
         }
         $('.sp-val').mouseout(function(){
-          $(button).css('color', previewColor.update());
+          $(domObj).css('color', previewColor.update());
           $(`.colorSelector`).css('color', previewColor.update());
           $('.sp-replacer').css('color', previewColor.update());
           $(target).css('color', previewColor.update());
@@ -312,9 +314,17 @@ $(function () {
     
 
     $(domObject.tFontColor).click(function(){//changing title font color
-      optionController.colorSelect(domObject.tFontColor,domObject.title, domObject.tFontColor);
-      
+      optionController.colorSelect(domObject.tFontColor,domObject.title);  
     });
+
+    $(domObject.barColor).click(function(){//changing barColor
+      optionController.colorSelect(domObject.barColor, domObject.allBars);
+    });
+
+    $(domObject.labelColor).click(function(){//changing labelColor
+      optionController.colorSelect(domObject.labelColor,domObject.allLabel);
+    })
+
   }
 
 
