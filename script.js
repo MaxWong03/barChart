@@ -13,9 +13,9 @@ const domObject = {
   barSpace: '#barSpace',
   tFontColor: '#tFontColor',
   barColor: '#barColor',
-  labelColor: '#labelColor'
+  labelColor: '#labelColor',
+  allColorSelector: '[class*=ColorSelector]'
 }
-
 
 const colorsCode = {
   red: '#c38d9e',
@@ -146,6 +146,19 @@ $(function () {
     }
 
   }
+  
+  //addColorSelecton initiaize the color selection for certain buttons 
+  const addColorSelection = () =>{
+    $(domObject.barColor).prepend('<input type="text" class="barColorSelector">');
+    $(domObject.labelColor).prepend('<input type="text" class="labelColorSelector">');
+    $(domObject.tFontColor).prepend('<input type="text" class="tFontColorSelector">');
+
+    $(domObject.allColorSelector).spectrum({
+      color: 'red',
+      showAlpha: true
+
+    })
+  }
 
   const changeTitleColor = (color) => {
     $(domObject.title).css('background-color', colorsCode[color]);
@@ -154,8 +167,14 @@ $(function () {
   //option controller have access to all custom functions that are included in options
   const optionController = (data) => {
     const previewColor ={
-      update:() =>{
-        return $(`.sp-preview-inner`).css('background-color');
+      update:(updateTarget) =>{
+        if(updateTarget === 'tFont'){
+          return $(`.tFontColorSelector .sp-preview-inner`).css('background-color');
+        }else if (updateTarget === 'label'){
+          return $('.labelColorSelector .sp-preview-inner').css('background-color');
+        }else{
+          return $('.barColorSelector .sp-preview-inner').css('background-color');
+        }
       }
     }
     const saveData = data;
@@ -221,22 +240,12 @@ $(function () {
           $(domObject.allPercent).show('slide', 800)
         }, 1100)
 
-      }, colorSelect: function(domObj,target){
-        if(document.querySelector(domObj).firstChild.id!=='tFontColorSelector'){
-          $(domObj).prepend('<input type="text" class="colorSelector">');
-          $(`.colorSelector`).spectrum({
-            color: 'red',
-            showAlpha: true
-      
-          })
-        }else{
-          //prevent adding more than 1 color selection box
-        }
+      }, colorSelect: function(domObj,target,colorOption){
         $('.sp-val').mouseout(function(){
           $(domObj).css('color', previewColor.update());
           $(`.colorSelector`).css('color', previewColor.update());
           $('.sp-replacer').css('color', previewColor.update());
-          $(target).css('color', previewColor.update());
+          $(target).css(colorOption, previewColor.update());
   
         });
       }
@@ -314,15 +323,15 @@ $(function () {
     
 
     $(domObject.tFontColor).click(function(){//changing title font color
-      optionController.colorSelect(domObject.tFontColor,domObject.title);  
+      optionController.colorSelect(domObject.tFontColor,domObject.title, 'color');  
     });
 
     $(domObject.barColor).click(function(){//changing barColor
-      optionController.colorSelect(domObject.barColor, domObject.allBars);
+      optionController.colorSelect(domObject.barColor, domObject.allBars, 'background-color');
     });
 
     $(domObject.labelColor).click(function(){//changing labelColor
-      optionController.colorSelect(domObject.labelColor,domObject.allLabel);
+      optionController.colorSelect(domObject.labelColor,domObject.allLabel, 'background-color');
     })
 
   }
@@ -345,6 +354,7 @@ $(function () {
     changeBarColor(data, 'red', 'odd');
     changeBarColor(data, 'blue', 'even');
     displayBarValue(data);
+    addColorSelection();
     const optionControl = optionController(data);
     optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor('yellow');
