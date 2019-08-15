@@ -288,7 +288,7 @@ $(function () {
 
     $(domObject.tFontColor).click(function(){//changing title font color
       if(document.querySelector(domObject.tFontColor).firstChild.id !== 'tFontColorSelector'){
-        $('#tFontColorButton').remove();
+        // $('#tFontColorButton').remove();
         $(domObject.tFontColor).prepend('<input type="text" id="tFontColorSelector">');
         $(`#tFontColorSelector`).spectrum({
           color: 'red',
@@ -298,7 +298,18 @@ $(function () {
       }else{
         //prevent adding more than 1 color selection box
       }
+      const previewColor = { 
+        update: () =>{
+          return $(`.sp-preview-inner`).css('background-color');
+        }
+      }
+      $('.sp-val').mouseout(function(){
+        $('#tFontColor').css('color', previewColor.update());
+        $(`#tFontColorButton`).css('color', previewColor.update());
+        $('.sp-replacer').css('color', previewColor.update());
 
+      });
+      
     });
   }
 

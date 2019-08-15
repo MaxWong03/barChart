@@ -200,10 +200,22 @@ html{
 
 .sp-preview{
   border-radius: 20px;
+  display: none;
+}
+
+.sp-replacer{
+  border: none;
+  color: rgba(197, 144, 137, 0);
+  opacity: 0;
+  padding:0;
 }
 
 .sp-dd{
   font-size: 13px;
+}
+
+.sp-dd:hover{
+  color: white;
 }
 
 .sp-palette-button-container, .sp-button-container{
@@ -229,4 +241,8 @@ html{
 .sp-dagger{
   border-radius: 10px;
   border: 2px solid rgb(209, 207, 207)
+}
+
+#tFontColorButton{
+
 }
