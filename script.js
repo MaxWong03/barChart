@@ -169,7 +169,7 @@ $(function () {
     const previewColor ={
       update:(updateTarget) =>{
         if(updateTarget === 'tFont'){
-          return $(`.tFontColorSelector .sp-preview-inner`).css('background-color');
+          return $(`.sp-preview-inner`).css('background-color');
         }else if (updateTarget === 'label'){
           return $('.labelColorSelector .sp-preview-inner').css('background-color');
         }else{
@@ -177,6 +177,30 @@ $(function () {
         }
       }
     }
+    const parseColorTarget =(target) => {
+      if (target === 'title'){
+        return {
+          button: domObject.tFontColor,
+          colorTarget: domObject.title,
+          changeColor: 'color',
+          preview: 'tFont'
+      }
+      }else if (target === 'bar'){
+        return {
+          button: domObject.barColor,
+          colorTarget: domObject.allBars,
+          changeColor: 'background-color',
+          preview: 'bar'
+        }
+      }else{
+        return {
+          button: domObject.labelColor,
+          colorTarget: domObject.allLabel,
+          changeColor: 'background-color'
+        }
+      }
+    }
+
     const saveData = data;
     const changeYAxisFormat = (format) => {
       let [newYAxis, newValue] = [[], 100];
@@ -240,12 +264,13 @@ $(function () {
           $(domObject.allPercent).show('slide', 800)
         }, 1100)
 
-      }, colorSelect: function(domObj,target,colorOption){
+      }, colorSelect: function(target){
+        const targetObj = parseColorTarget(target);
         $('.sp-val').mouseout(function(){
-          $(domObj).css('color', previewColor.update());
-          $(`.colorSelector`).css('color', previewColor.update());
-          $('.sp-replacer').css('color', previewColor.update());
-          $(target).css(colorOption, previewColor.update());
+          $(targetObj.button).css('color', previewColor.update(targetObj.preview));
+          $(`.colorSelector`).css('color', previewColor.update(targetObj.preview));
+          $('.sp-replacer').css('color', previewColor.update(targetObj.preview));
+          $(targetObj.colorTarget).css(targetObj.changeColor, previewColor.update(targetObj.preview));
   
         });
       }
@@ -321,18 +346,11 @@ $(function () {
     });
 
     
+    //Event listener for color Selection 
+    optionController.colorSelect('title');
+    optionController.colorSelect('label');
+    optionController.colorSelect('bar');
 
-    $(domObject.tFontColor).click(function(){//changing title font color
-      optionController.colorSelect(domObject.tFontColor,domObject.title, 'color');  
-    });
-
-    $(domObject.barColor).click(function(){//changing barColor
-      optionController.colorSelect(domObject.barColor, domObject.allBars, 'background-color');
-    });
-
-    $(domObject.labelColor).click(function(){//changing labelColor
-      optionController.colorSelect(domObject.labelColor,domObject.allLabel, 'background-color');
-    })
 
   }
 
