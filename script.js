@@ -289,7 +289,9 @@ $(function () {
           }
           $(domObject.allPercent).show('slide', 800)
         }, 1100)
-
+      
+      }, changeValuePos: function(placement){
+        changeValuePlacement(placement);
       }
 
     }
@@ -389,7 +391,7 @@ $(function () {
     optionControl.changeEvenBarColor(option.barColor2);
     optionControl.changeTitleSize(option.titleFontSize);
     optionControl.changeTitleColor(option.titleFontColor);
-
+    optionControl.changeValuePos(option.valuePos);
     eventListener(optionControl);
   }
 
@@ -399,7 +401,7 @@ $(function () {
     titleFontSize: 'm',
     titleFontColor: 'grey',
     labelArr: '',
-    valuePos: '',
+    valuePos: 'mid',
     barColor1: 'yellow',
     barColor2: 'blue',
     labelColor1: 'yellow',
