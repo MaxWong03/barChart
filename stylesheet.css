@@ -8,7 +8,7 @@ html{
   background-color: rgba(229, 198, 157, 0.904);
 }
 
-#barChart{
+[id*=barChart]{
   display: flex;
   flex-direction: column;
   align-items: center;
