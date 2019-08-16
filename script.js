@@ -62,6 +62,20 @@ $(function () {
     }
   }
 
+  
+  const changeBarSpace = (isEvent, size) => {
+    const barSpace = ['10px', '20px', '30px', '40px', '50px', '60px', '70px'];
+    const sizeString = ['xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl'];
+    if (isEvent){
+      const currentBarSize = ($(domObject.chart).css('column-gap'));
+      $(domObject.chart).css('column-gap', loopOption(barSpace, currentBarSize));
+    }else {
+      const newSize = barSpace[sizeString.indexOf(size)];
+      $(domObject.chart).css('column-gap', newSize);
+    }
+  }
+
+
   //getBarNum returns the number of bar the chart should render 
   const getBarNum = (data) => {
     return data.length;
@@ -279,7 +293,7 @@ $(function () {
           let currentLabel = document.querySelector(`.label${i}`);
           $(currentLabel).css('background-color', colorsCode[color]);
         }
-      }, changeYAxis: function (format, isEvent) {
+      }, changeYAxis: function (format, isEvent=false) {
         let yAxis = document.querySelectorAll(domObject.allPercent);
         let newYAxis = changeYAxisFormat(format);
         if (isEvent){
@@ -298,6 +312,8 @@ $(function () {
       
       }, changeValuePos: function(placement){
         changeValuePlacement(placement);
+      }, changeSpacing: function(size, isEvent=false){
+        changeBarSpace(isEvent, size);
       }
 
     }
@@ -362,9 +378,7 @@ $(function () {
     });
 
     $(domObject.barSpace).click(function () { //changing barSpace
-      const barSpace = ['10px', '20px', '30px', '40px', '50px', '60px', '70px'];
-      const currentBarSize = ($(domObject.chart).css('column-gap'));
-      $(domObject.chart).css('column-gap', loopOption(barSpace, currentBarSize));
+      changeBarSpace(true);
     });
 
  
@@ -392,13 +406,13 @@ $(function () {
     addColorSelection();
     const optionControl = optionController(data);
     optionControl.changeTitleText(option.title);
-    optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor(option.barColor1);
     optionControl.changeEvenBarColor(option.barColor2);
     optionControl.changeTitleSize(option.titleFontSize);
     optionControl.changeTitleColor(option.titleFontColor);
     optionControl.changeValuePos(option.valuePos);
-    optionControl.changeYAxis(option.chartAxes, false);
+    optionControl.changeYAxis(option.chartAxes);
+    optionControl.changeSpacing(option.barSpace);
     eventListener(optionControl);
   }
 
@@ -413,7 +427,7 @@ $(function () {
     barColor2: 'blue',
     labelColor1: 'yellow',
     labelColor2: 'blue',
-    barSpace: '',
+    barSpace: 'xxxl',
     chartAxes: 'percent',
 
   }, element) => {
