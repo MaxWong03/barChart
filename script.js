@@ -279,16 +279,22 @@ $(function () {
           let currentLabel = document.querySelector(`.label${i}`);
           $(currentLabel).css('background-color', colorsCode[color]);
         }
-      }, changeYAxis: function (format) {
+      }, changeYAxis: function (format, isEvent) {
         let yAxis = document.querySelectorAll(domObject.allPercent);
         let newYAxis = changeYAxisFormat(format);
-        $(domObject.allPercent).hide('slide', 800);
-        setTimeout(() => {
+        if (isEvent){
+          $(domObject.allPercent).hide('slide', 800);
+          setTimeout(() => {
+            for (let i = 0; i < 10; i++) {
+              yAxis[i].innerHTML = newYAxis[i];
+            }
+            $(domObject.allPercent).show('slide', 800)
+          }, 1100)
+        }else{
           for (let i = 0; i < 10; i++) {
             yAxis[i].innerHTML = newYAxis[i];
           }
-          $(domObject.allPercent).show('slide', 800)
-        }, 1100)
+        }
       
       }, changeValuePos: function(placement){
         changeValuePlacement(placement);
@@ -352,7 +358,7 @@ $(function () {
           return 'value';
         }
       }
-      getFormat() === 'percent' ? optionController.changeYAxis('value') : optionController.changeYAxis('percent');
+      getFormat() === 'percent' ? optionController.changeYAxis('value', true) : optionController.changeYAxis('percent', true);
     });
 
     $(domObject.barSpace).click(function () { //changing barSpace
@@ -392,6 +398,7 @@ $(function () {
     optionControl.changeTitleSize(option.titleFontSize);
     optionControl.changeTitleColor(option.titleFontColor);
     optionControl.changeValuePos(option.valuePos);
+    optionControl.changeYAxis(option.chartAxes, false);
     eventListener(optionControl);
   }
 
@@ -407,7 +414,7 @@ $(function () {
     labelColor1: 'yellow',
     labelColor2: 'blue',
     barSpace: '',
-    chartAxes: '',
+    chartAxes: 'percent',
 
   }, element) => {
     initBarChart(data,option);
