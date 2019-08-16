@@ -2,6 +2,7 @@ const domObject = {
   chart: '.chart',
   allBars: '[class*=bar]',
   title: '#titleText',
+  titleString: '#titleString',
   allPercent: '[class*=Percent]',
   allLabel: '[class*=label]',
   option: '.option',
@@ -53,11 +54,11 @@ $(function () {
     const fontSize = ['16px', '24px', '32px', '40px', '48px'];
     const sizeString =['xs', 's', 'm', 'l', 'xl'];
     if (isEvent){
-      const currentFontSize = ($(domObject.title).css('font-size'));
-      $(domObject.title).css('font-size', loopOption(fontSize, currentFontSize));
+      const currentFontSize = ($(domObject.titleString).css('font-size'));
+      $(domObject.titleString).css('font-size', loopOption(fontSize, currentFontSize));
     }else{
       const newSize = fontSize[sizeString.indexOf(size)]; 
-      $(domObject.title).css('font-size', newSize);
+      $(domObject.titleString).css('font-size', newSize);
     }
   }
 
@@ -257,7 +258,7 @@ $(function () {
       changeOddBarColor: function (color) {
         changeBarColor(saveData, color, 'odd');
       }, changeTitleText: function (newTitle) {
-        $(domObject.title).html(newTitle);
+        $(domObject.titleString).html(newTitle);
       }, changeTitleColor: function (color) {
         $(domObject.title).css('color', colorsCode[color]);
       }, changeTitleSize: function (size) {
@@ -386,7 +387,7 @@ $(function () {
     optionControl.changeBarSpace('10px');
     optionControl.changeOddBarColor(option.barColor1);
     optionControl.changeEvenBarColor(option.barColor2);
-    // optionControl.changeTitleSize(option.titleFontSize);
+    optionControl.changeTitleSize(option.titleFontSize);
 
     eventListener(optionControl);
   }
@@ -394,7 +395,7 @@ $(function () {
   //main function that draws the chart
   const drawBarChart = (data, option={
     title: 'Untitled Bar Chart',
-    titleFontSize: 'xl',
+    titleFontSize: 'm',
     titleFontColor: '',
     labelArr: '',
     valuePos: '',

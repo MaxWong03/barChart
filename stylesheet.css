@@ -34,7 +34,6 @@ html{
   overflow: scroll;
   scroll-behavior: smooth;
   outline: none;
-  font-size: 2em;
 }
 
 .chartComponent{
@@ -248,4 +247,8 @@ html{
 p{
   display: inline-block;
   margin: 0px;
+}
+
+#titleString{
+  font-size: 2em;
 }
