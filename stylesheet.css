@@ -115,8 +115,9 @@ html{
 
 .optionBar{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
+
 }
 
 [class*=bar]{
@@ -169,7 +170,8 @@ html{
   box-shadow: 3px 3px rgba(150, 74, 74, 0.349);
   font-size: 1.5em;
   font-weight: bold;
-  margin-top: 20px;
+  margin: 10px 10px 10px 10px;
+  
 }
 
 #labelColor, #chartAxes{
@@ -243,6 +245,7 @@ html{
   border: 2px solid rgb(209, 207, 207)
 }
 
-#tFontColorButton{
-
+p{
+  display: inline-block;
+  margin: 0px;
 }

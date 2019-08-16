@@ -14,7 +14,16 @@ const domObject = {
   tFontColor: '#tFontColor',
   barColor: '#barColor',
   labelColor: '#labelColor',
-  allColorSelector: '[class*=ColorSelector]'
+  allColorSelector: '[class*=ColorSelector]',
+  oddBar: '[class*="bar"]:nth-child(odd)',
+  evenBar: '[class*="bar"]:nth-child(even)',
+  oddLabel: '[class*="label"]:nth-child(odd)',
+  evenLabel: '[class*="label"]:nth-child(even)',
+  barColorSec1: '#bcsf',
+  barColorSec2: '#bcs',
+  labelColorSec1: '#lcsf',
+  labelColorSec2: '#lcs'
+
 }
 
 const colorsCode = {
@@ -150,7 +159,9 @@ $(function () {
   //addColorSelecton initiaize the color selection for certain buttons 
   const addColorSelection = () => {
     $(domObject.barColor).prepend('<input type="text" class="barColorSelector">');
+    $(domObject.barColor).append('<input type="text" class="barColorSelector2">');
     $(domObject.labelColor).prepend('<input type="text" class="labelColorSelector">');
+    $(domObject.labelColor).append('<input type="text" class="labelColorSelector2">');
     $(domObject.tFontColor).prepend('<input type="text" class="tFontColorSelector">');
 
     $('.tFontColorSelector').spectrum({
@@ -165,20 +176,41 @@ $(function () {
       color: 'red',
       showAlpha: true,
       move: function(tinycolor){
-        $(domObject.allLabel).css('background-color',tinycolor.toHexString());
-        $(domObject.labelColor).css('color', tinycolor.toHexString());
+        $(domObject.oddLabel).css('background-color',tinycolor.toHexString());
+        $(domObject.labelColorSec1).css('color', tinycolor.toHexString());
+        $('#labelText1').css('color', tinycolor.toHexString());
       }
     })
     $('.barColorSelector').spectrum({
       color: 'red',
       showAlpha: true,
       move: function(tinyColor){
-        $(domObject.allBars).css('background-color',
+        $(domObject.oddBar).css('background-color',
         tinyColor.toHexString());
-        $(domObject.barColor).css('color', tinyColor.toHexString());
+        $(domObject.barColorSec1).css('color', tinyColor.toHexString());
+        $('#barText1').css('color', tinyColor.toHexString());
       }
     })
-
+    $('.barColorSelector2').spectrum({
+      color: 'red',
+      showAlpha: true,
+      move: function(tinyColor){
+        $(domObject.evenBar).css('background-color',
+        tinyColor.toHexString());
+        $(domObject.barColorSec2).css('color', tinyColor.toHexString());
+        $('#barText2').css('color', tinyColor.toHexString());
+      }
+    })
+    $('.labelColorSelector2').spectrum({
+      color: 'red',
+      showAlpha: true,
+      move: function(tinyColor){
+        $(domObject.evenLabel).css('background-color',
+        tinyColor.toHexString());
+        $(domObject.labelColorSec2).css('color', tinyColor.toHexString());
+        $('#labelText2').css('color', tinyColor.toHexString());
+      }
+    })
   }
 
   const changeTitleColor = (color) => {
@@ -322,7 +354,7 @@ $(function () {
       $(domObject.chart).css('column-gap', loopOption(barSpace, currentBarSize));
     });
 
-
+ 
 
 
 
