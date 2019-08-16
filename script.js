@@ -53,7 +53,6 @@ $(function () {
   const changeFontSize = (isEvent, size) =>{
     const fontSize = ['16px', '24px', '32px', '40px', '48px'];
     const sizeString =['xs', 's', 'm', 'l', 'xl'];
-    console.log(isEvent);
     if (isEvent){
       const currentFontSize = ($(domObject.titleString).css('font-size'));
       $(domObject.titleString).css('font-size', loopOption(fontSize, currentFontSize));
@@ -315,6 +314,14 @@ $(function () {
         changeValuePlacement(placement);
       }, changeSpacing: function(size, isEvent=false){
         changeBarSpace(isEvent, size);
+      }, makeLabels: function(labels){
+        if (labels==='default'){
+          //do nothing
+        }else{
+          for (let i = 0; i < labels.length; i++) {
+            $(`.label${i + 1}`).html(`${labels[i]}`);
+          }
+        }
       }
 
     }
@@ -406,6 +413,7 @@ $(function () {
     displayBarValue(data);
     addColorSelection();
     const optionControl = optionController(data);
+    optionControl.makeLabels(option.labelArr);
     optionControl.changeTitleText(option.title);
     optionControl.changeOddBarColor(option.barColor1);
     optionControl.changeEvenBarColor(option.barColor2);
@@ -422,7 +430,7 @@ $(function () {
     title: 'Untitled Bar Chart',
     titleFontSize: 'm',
     titleFontColor: 'grey',
-    labelArr: '',
+    labelArr: 'default',
     valuePos: 'mid',
     barColor1: 'yellow',
     barColor2: 'blue',
