@@ -49,6 +49,18 @@ $(function () {
     }
   }
 
+  const changeFontSize = (isEvent, size) =>{
+    const fontSize = ['16px', '24px', '32px', '40px', '48px'];
+    const sizeString =['xs', 's', 'm', 'l', 'xl'];
+    if (isEvent){
+      const currentFontSize = ($(domObject.title).css('font-size'));
+      $(domObject.title).css('font-size', loopOption(fontSize, currentFontSize));
+    }else{
+      const newSize = fontSize[sizeString.indexOf(size)]; 
+      $(domObject.title).css('font-size', newSize);
+    }
+  }
+
   //getBarNum returns the number of bar the chart should render 
   const getBarNum = (data) => {
     return data.length;
@@ -166,7 +178,6 @@ $(function () {
 
     $('.tFontColorSelector').spectrum({
       color: 'red',
-      showAlpha: true,
       move: function(tinycolor){
         $(domObject.title).css('color', tinycolor.toHexString());
         $(domObject.tFontColor).css('color', tinycolor.toHexString());
@@ -174,7 +185,6 @@ $(function () {
     })
     $('.labelColorSelector').spectrum({
       color: 'red',
-      showAlpha: true,
       move: function(tinycolor){
         $(domObject.oddLabel).css('background-color',tinycolor.toHexString());
         $(domObject.labelColorSec1).css('color', tinycolor.toHexString());
@@ -183,7 +193,6 @@ $(function () {
     })
     $('.barColorSelector').spectrum({
       color: 'red',
-      showAlpha: true,
       move: function(tinyColor){
         $(domObject.oddBar).css('background-color',
         tinyColor.toHexString());
@@ -193,7 +202,6 @@ $(function () {
     })
     $('.barColorSelector2').spectrum({
       color: 'red',
-      showAlpha: true,
       move: function(tinyColor){
         $(domObject.evenBar).css('background-color',
         tinyColor.toHexString());
@@ -203,7 +211,6 @@ $(function () {
     })
     $('.labelColorSelector2').spectrum({
       color: 'red',
-      showAlpha: true,
       move: function(tinyColor){
         $(domObject.evenLabel).css('background-color',
         tinyColor.toHexString());
@@ -254,7 +261,7 @@ $(function () {
       }, changeTitleColor: function (color) {
         $(domObject.title).css('color', colorsCode[color]);
       }, changeTitleSize: function (size) {
-        $(domObject.title).css('font-size', size);
+        changeFontSize(false, size);
       }, changeLabelColor: function (color, option) {
         let optionValue, increments;
         switch (option) {
@@ -331,10 +338,7 @@ $(function () {
     });
 
     $(domObject.tFontSize).click(function () { //changing title font
-
-      const fontSize = ['16px', '24px', '32px', '40px', '48px'];
-      const currentFontSize = ($(domObject.title).css('font-size'));
-      $(domObject.title).css('font-size', loopOption(fontSize, currentFontSize));
+      changeFontSize(true);
     });
 
     $(domObject.chartAxes).click(function () { //changing chart axes
@@ -361,9 +365,7 @@ $(function () {
   }
 
 
-
-  //main function that draws the chart
-  const drawBarChart = (data, option, element) => {
+  const initBarChart = (data,option) => {
     const charColNum = addBarTag(data);
     showTitle();
     showOption();
@@ -380,10 +382,31 @@ $(function () {
     displayBarValue(data);
     addColorSelection();
     const optionControl = optionController(data);
+    optionControl.changeTitleText(option.title);
     optionControl.changeBarSpace('10px');
-    optionControl.changeOddBarColor('yellow');
-    optionControl.changeTitleText('Untitled Bar Chart');
+    optionControl.changeOddBarColor(option.barColor1);
+    optionControl.changeEvenBarColor(option.barColor2);
+    // optionControl.changeTitleSize(option.titleFontSize);
+
     eventListener(optionControl);
+  }
+
+  //main function that draws the chart
+  const drawBarChart = (data, option={
+    title: 'Untitled Bar Chart',
+    titleFontSize: 'xl',
+    titleFontColor: '',
+    labelArr: '',
+    valuePos: '',
+    barColor1: 'yellow',
+    barColor2: 'blue',
+    labelColor1: 'yellow',
+    labelColor2: 'blue',
+    barSpace: '',
+    chartAxes: '',
+
+  }, element) => {
+    initBarChart(data,option);
 
   }
 
