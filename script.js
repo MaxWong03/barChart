@@ -33,7 +33,7 @@ const colorsCode = {
   orange: '#e27d60',
   yellow: '#e8a87c',
   green: '#41b3a3',
-  grey: '#bab2b5',
+  grey: 'rgb(121, 121, 121)',
   lightGrey: '#eae7dc',
   lightNavy: '#a80de6',
   lightPurple: '#d5cfda'
@@ -54,7 +54,7 @@ $(function () {
     const fontSize = ['16px', '24px', '32px', '40px', '48px'];
     const sizeString =['xs', 's', 'm', 'l', 'xl'];
     if (isEvent){
-      const currentFontSize = ($(domObject.titleString).css('font-size'));
+      const currentFontSize = ($(domObject.titleStringti).css('font-size'));
       $(domObject.titleString).css('font-size', loopOption(fontSize, currentFontSize));
     }else{
       const newSize = fontSize[sizeString.indexOf(size)]; 
@@ -260,7 +260,7 @@ $(function () {
       }, changeTitleText: function (newTitle) {
         $(domObject.titleString).html(newTitle);
       }, changeTitleColor: function (color) {
-        $(domObject.title).css('color', colorsCode[color]);
+        $(domObject.titleString).css('color', colorsCode[color]);
       }, changeTitleSize: function (size) {
         changeFontSize(false, size);
       }, changeLabelColor: function (color, option) {
@@ -388,6 +388,7 @@ $(function () {
     optionControl.changeOddBarColor(option.barColor1);
     optionControl.changeEvenBarColor(option.barColor2);
     optionControl.changeTitleSize(option.titleFontSize);
+    optionControl.changeTitleColor(option.titleFontColor);
 
     eventListener(optionControl);
   }
@@ -396,7 +397,7 @@ $(function () {
   const drawBarChart = (data, option={
     title: 'Untitled Bar Chart',
     titleFontSize: 'm',
-    titleFontColor: '',
+    titleFontColor: 'grey',
     labelArr: '',
     valuePos: '',
     barColor1: 'yellow',
