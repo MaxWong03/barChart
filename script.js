@@ -53,8 +53,9 @@ $(function () {
   const changeFontSize = (isEvent, size) =>{
     const fontSize = ['16px', '24px', '32px', '40px', '48px'];
     const sizeString =['xs', 's', 'm', 'l', 'xl'];
+    console.log(isEvent);
     if (isEvent){
-      const currentFontSize = ($(domObject.titleStringti).css('font-size'));
+      const currentFontSize = ($(domObject.titleString).css('font-size'));
       $(domObject.titleString).css('font-size', loopOption(fontSize, currentFontSize));
     }else{
       const newSize = fontSize[sizeString.indexOf(size)]; 
@@ -194,7 +195,7 @@ $(function () {
     $('.tFontColorSelector').spectrum({
       color: 'red',
       move: function(tinycolor){
-        $(domObject.title).css('color', tinycolor.toHexString());
+        $(domObject.titleString).css('color', tinycolor.toHexString());
         $(domObject.tFontColor).css('color', tinycolor.toHexString());
       }
     })
@@ -427,7 +428,7 @@ $(function () {
     barColor2: 'blue',
     labelColor1: 'yellow',
     labelColor2: 'blue',
-    barSpace: 'xxxl',
+    barSpace: 'xs',
     chartAxes: 'percent',
 
   }, element) => {
