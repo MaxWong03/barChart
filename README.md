@@ -1,13 +1,13 @@
 # Bar Chart Project
 
 ### Website Overview
-[!gif1](https://github.com/MaxWong03/barChart/blob/master/docs/website.gif)
+![gif1](https://github.com/MaxWong03/barChart/blob/master/docs/website.gif)
 ### Title Features
-[!gif2](https://github.com/MaxWong03/barChart/blob/master/docs/title.gif)
+![gif2](https://github.com/MaxWong03/barChart/blob/master/docs/title.gif)
 ### Bar Features
-[!gif3](https://github.com/MaxWong03/barChart/blob/master/docs/bar.gif)
+![gif3](https://github.com/MaxWong03/barChart/blob/master/docs/bar.gif)
 ### Label and Chart Axes Features
-[!gif4](https://github.com/MaxWong03/barChart/blob/master/docs/label%26Chart.gif)
+![gif4](https://github.com/MaxWong03/barChart/blob/master/docs/label%26Chart.gif)
 
 
 * This app allows user to build and customize a bar chart and render it into the browser
